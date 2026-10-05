@@ -1,0 +1,101 @@
+Asynchronous JavaScript ⭐⭐⭐
+Synchronous vs Asynchronous
+Web APIs
+window.setTimeout === setTimeout;       // true
+window.fetch === fetch;                 // true
+window.document === document;           // true
+window.localStorage === localStorage;   // true
+Callback
+Callback hell
+getUser(userId, function(user) {
+  getOrders(user.id, function(orders) {
+    processPayment(orders[0].id, function(paymentStatus) {
+      sendEmail(user.email, paymentStatus, function(response) {
+        console.log("ইমেইল সফলভাবে পাঠানো হয়েছে:", response);
+      }, function(emailError) {
+        console.error("ইমেইল পাঠানো যায়নি:", emailError);
+      });
+    }, function(paymentError) {
+      console.error("পেমেন্ট ব্যর্থ হয়েছে:", paymentError);
+    });
+  }, function(ordersError) {
+    console.error("অর্ডার পাওয়া যায়নি:", ordersError);
+  });
+}, function(userError) {
+  console.error("ইউজার পাওয়া যায়নি:", userError);
+});
+Promise
+Promise states
+.then()
+.catch()
+.finally()
+async
+await
+try/catch
+
+Fetch API & APIs
+HTTP basics
+Client (Browser)                       Server (Backend/DB)
+┌──────────────────┐                    ┌──────────────────┐
+│                  │  1. HTTP Request   │                  │
+│                  ├───────────────────►│                  │
+│                  │                    │                  │
+│                  │  2. HTTP Response  │                  │
+│                  │◄───────────────────┤                  │
+└──────────────────┘                    └──────────────────┘
+একটি সাধারণ HTTP কমিউনিকেশনে প্রধান ৪টি অংশ থাকে:
+URL / Endpoint: সার্ভারের যে নির্দিষ্ট পাথে রিকোয়েস্ট পাঠানো হয় (যেমন: [https://api.example.com/users](https://api.example.com/users))।
+HTTP Method (Verbs): কী ধরণের অপারেশন চালানো হচ্ছে।
+Headers: মেটাডেটা (যেমন কনটেন্টের ধরন কী, অথেনটিকেশন টোকেন ইত্যাদি)।
+Body: রিকোয়েস্ট বা রেসপন্সে পাঠানো আসল ডেটা (সাধারণত JSON ফরম্যাটে)।
+
+HTTP Status Codes
+2xx (Success):
+200 OK
+201 Created
+
+3xx (Redirection): 301 / 302
+
+4xx (Client Errors):
+400 Bad Request: ক্লায়েন্ট ভুল ফরম্যাটে রিকোয়েস্ট পাঠিয়েছে।
+401 Unauthorized:
+403 Forbidden: পারমিশন নেই।
+404 Not Found:
+
+5xx (Server Errors):
+500 Internal Server Error: ব্যাকএন্ড সার্ভারের কোডে ক্র্যাশ বা এরর।
+502 / 503 Bad Gateway / Service Unavailable
+
+GET
+POST
+PUT
+PATCH
+DELETE
+fetch()
+Request
+Response
+JSON
+Headers
+Status codes
+Error handling
+
+
+JavaScript Modules
+Named export
+Default export
+import
+export
+Dynamic import
+// সাধারণ সিনট্যাক্স (Promise)
+const button = document.querySelector("#load-chart-btn");
+
+button.addEventListener("click", () => {
+  // বাটনে ক্লিক করার আগ পর্যন্ত এই ফাইলটি ডাউনলোডই হবে না
+  import("./heavyChartLibrary.js")
+    .then((chartModule) => {
+      chartModule.renderChart();
+    })
+    .catch((err) => {
+      console.error("Module loading problem:", err);
+    });
+});
